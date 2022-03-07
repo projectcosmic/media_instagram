@@ -1,0 +1,15 @@
+media_instagram.link:
+  path: '/admin/media-instagram/link'
+  defaults:
+    _title: 'Link Instagram'
+    _controller: '\Drupal\media_instagram\Controller\MediaInstagramController::link'
+  requirements:
+    _permission: 'media_instagram link instagram'
+
+media_instagram.after_login:
+  path: '/admin/media-instagram/after-login'
+  defaults:
+    _title: 'After Instagram Login'
+    _controller: '\Drupal\media_instagram\Controller\MediaInstagramController::afterLogin'
+  requirements:
+    _permission: 'media_instagram link instagram'

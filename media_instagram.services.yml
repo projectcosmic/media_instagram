@@ -1,0 +1,10 @@
+services:
+  logger.channel.media_instagram:
+    parent: logger.channel_base
+    arguments: ['media_instagram']
+  media_instagram.instagram_authentication:
+    class: Drupal\media_instagram\InstagramAuthentication
+    arguments: ['@tempstore.private', '@uuid']
+  media_instagram.instagram_fetcher:
+    class: Drupal\media_instagram\InstagramFetcher
+    arguments: ['@http_client', '@logger.channel.media_instagram', '@config.factory', '@cache.default']

@@ -1,0 +1,19 @@
+# Schema for the configuration files of the Media Instagram module.
+
+media_instagram.settings:
+  type: config_object
+  mapping:
+    authentication:
+      type: mapping
+      mapping:
+        app_id:
+          type: string
+        app_secret:
+          type: string
+
+media.source.instagram:
+  type: media.source.field_aware
+  label: 'Instagram media source configuration'
+  mapping:
+    fetch_count:
+      type: integer

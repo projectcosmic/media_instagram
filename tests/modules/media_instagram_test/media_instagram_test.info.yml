@@ -1,0 +1,6 @@
+name: Media Instagram test module
+type: module
+description: 'Support module for Media Instagram tests.'
+package: Testing
+dependencies:
+  - media_instagram:media_instagram

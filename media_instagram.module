@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Provides media integration for Instagram posts.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_cron().
+ */
+function media_instagram_cron() {
+  $queue = \Drupal::queue('media_instagram_fetch');
+
+  /** @var \Drupal\media\MediaTypeInterface[] $bundles */
+  $bundles = \Drupal::entityTypeManager()
+    ->getStorage('media_type')
+    ->loadByProperties(['source' => 'instagram']);
+  foreach ($bundles as $bundle) {
+    $queue->createItem($bundle);
+  }
+
+  $state = \Drupal::state();
+  $token = $state->get('media_instagram.token');
+
+  if ($token && $token['refresh'] - \Drupal::time()->getRequestTime() < 0) {
+    $state->set(
+      'media_instagram.token',
+      \Drupal::service('media_instagram.instagram_fetcher')->refreshToken($token['token']) ?? $token
+    );
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function media_instagram_media_type_delete(EntityInterface $entity) {
+  \Drupal::state()->delete("media_instagram.{$entity->id()}.since");
+}

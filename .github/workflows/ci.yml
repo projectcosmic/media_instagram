@@ -1,0 +1,22 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+    paths-ignore:
+      # Files in .github do not affect the build; only for GitHub interaction.
+      - .github/**
+      # Exception is workflows subdirectory, where this file sits.
+      - '!.github/workflows/**'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  ci:
+    name: Continuous Integration
+    uses: projectcosmic/gh-actions/.github/workflows/drupal-extension-ci.yml@v2

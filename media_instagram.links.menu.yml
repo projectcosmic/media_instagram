@@ -1,0 +1,5 @@
+media_instagram.link:
+  title: 'Link Instagram'
+  parent: system.admin_config_services
+  description: 'Link this website with an Instagram account.'
+  route_name: media_instagram.link

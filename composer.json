@@ -1,0 +1,8 @@
+{
+    "name": "projectcosmic/media_instagram",
+    "description": "Provides media integration with Instagram.",
+    "type": "drupal-module",
+    "require": {
+        "drupal/core": "^9"
+    }
+}

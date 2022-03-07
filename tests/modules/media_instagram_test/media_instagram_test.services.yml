@@ -1,0 +1,5 @@
+services:
+  media_instagram_test.http_client:
+    class: GuzzleHttp\Client
+    factory: [Drupal\media_instagram_test\HttpClientFactory, create]
+    arguments: ['@state']
