@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning].
 
 ## [Unreleased]
+### Fixed
+- Fix token refreshing
 
 ## [0.1.0] - 2022-03-07
 - Initial release

@@ -25,10 +25,16 @@ function media_instagram_cron() {
   $token = $state->get('media_instagram.token');
 
   if ($token && $token['refresh'] - \Drupal::time()->getRequestTime() < 0) {
-    $state->set(
-      'media_instagram.token',
-      \Drupal::service('media_instagram.instagram_fetcher')->refreshToken($token['token']) ?? $token
-    );
+    $refreshed_token = \Drupal::service('media_instagram.instagram_fetcher')->refreshToken($token['token']);
+    if ($refreshed_token) {
+      $state->set('media_instagram.token', [
+        'token' => $refreshed_token['access_token'],
+        // Set refresh timestamp, ¾ before token expires to give a time buffer
+        // in case a refresh request fails, thus giving more opportunities in
+        // future cron runs.
+        'refresh' => \Drupal::time()->getRequestTime() + floor($refreshed_token['expires_in'] * 0.75),
+      ]);
+    }
   }
 }
 
