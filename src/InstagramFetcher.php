@@ -117,8 +117,8 @@ class InstagramFetcher implements InstagramFetcherInterface {
    */
   public function getAccessToken($code) {
     try {
-      $response = $this->httpClient->get('https://api.instagram.com/oauth/access_token', [
-        'query' => [
+      $response = $this->httpClient->post('https://api.instagram.com/oauth/access_token', [
+        'form_params' => [
           'grant_type' => 'authorization_code',
           'client_id' => $this->config->get('authentication.app_id'),
           'client_secret' => $this->config->get('authentication.app_secret'),
