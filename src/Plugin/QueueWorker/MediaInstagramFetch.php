@@ -97,7 +97,6 @@ class MediaInstagramFetch extends QueueWorkerBase implements ContainerFactoryPlu
 
       if ($source->getPluginId() == 'instagram' && $source_config['fetch_count'] > 0 && $token) {
         $bundle_key = $this->mediaStorage->getEntityType()->getKey('bundle');
-        $source_field = $source->getSourceFieldDefinition($data)->getName();
 
         $state_key = "media_instagram.{$data->id()}.since";
         $since = $this->state->get($state_key, 0);
@@ -124,7 +123,7 @@ class MediaInstagramFetch extends QueueWorkerBase implements ContainerFactoryPlu
           $this->mediaStorage
             ->create([
               $bundle_key => $data->id(),
-              $source_field => $post['id'],
+              $source_config['source_field'] => $post['id'],
             ])
             ->save();
         }
