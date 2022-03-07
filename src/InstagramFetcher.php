@@ -98,12 +98,11 @@ class InstagramFetcher implements InstagramFetcherInterface {
     try {
       $response = $this->httpClient->get('https://graph.instagram.com/v13.0/me/media', [
         'query' => [
+          'fields' => 'id,timestamp',
           'access_token' => $token,
         ],
       ]);
-
-      $data = json_decode((string) $response->getBody(), TRUE);
-      return array_map(fn ($post) => $post['id'], $data['data'] ?? []);
+      return json_decode((string) $response->getBody(), TRUE)['data'] ?? [];
     }
     catch (TransferException $e) {
       $this->logger->error($e->__toString());

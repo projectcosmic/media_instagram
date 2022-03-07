@@ -36,7 +36,7 @@ interface InstagramFetcherInterface {
    * @param string $token
    *   An access token.
    *
-   * @return string[]|null
+   * @return array[]|null
    *   Returns NULL if there was an error or an array of data, which may
    *   includes:
    *   - id: The post's ID.
