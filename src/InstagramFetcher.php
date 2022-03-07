@@ -98,11 +98,19 @@ class InstagramFetcher implements InstagramFetcherInterface {
     try {
       $response = $this->httpClient->get('https://graph.instagram.com/v13.0/me/media', [
         'query' => [
-          'fields' => 'id,timestamp',
+          'fields' => 'caption,id,media_url,permalink,thumbnail_url,timestamp,username',
           'access_token' => $token,
         ],
       ]);
-      return json_decode((string) $response->getBody(), TRUE)['data'] ?? [];
+
+      $posts = json_decode((string) $response->getBody(), TRUE)['data'] ?? [];
+      // Save posts that would need to be fetched by ::getPost() to cache to
+      // reduce usage.
+      foreach ($posts as $post) {
+        $cache_id = "media:instagram:$post[id]";
+        $this->cacheBackend->set($cache_id, $post);
+      }
+      return $posts;
     }
     catch (TransferException $e) {
       $this->logger->error($e->__toString());
