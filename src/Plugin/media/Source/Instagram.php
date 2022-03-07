@@ -188,7 +188,7 @@ class Instagram extends MediaSourceBase {
 
         case 'default_name':
           return function_exists('text_summary')
-            ? text_summary($this->getMetadata($media, 'caption'), NULL, 30)
+            ? text_summary($this->getMetadata($media, 'caption'), filter_default_format(), 100)
             : $id;
 
         default:
