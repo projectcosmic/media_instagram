@@ -32,7 +32,7 @@ use Symfony\Component\Mime\MimeTypes;
  * @MediaSource(
  *   id = "instagram",
  *   label = @Translation("Instagram"),
- *   allowed_field_types = {"integer", "string"},
+ *   allowed_field_types = {"string"},
  *   default_thumbnail_filename = "instagram.png",
  *   description = @Translation("Provides media representation for an Instagram post."),
  * )
