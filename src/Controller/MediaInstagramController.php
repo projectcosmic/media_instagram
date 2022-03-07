@@ -123,7 +123,7 @@ class MediaInstagramController extends ControllerBase {
     }
 
     $this->state()->set('media_instagram.token', [
-      'token' => $token['token'],
+      'token' => $token['access_token'],
       // Set refresh timestamp, ¾ before token expires to give a time buffer
       // in case a refresh request fails, thus giving more opportunities in
       // future cron runs.

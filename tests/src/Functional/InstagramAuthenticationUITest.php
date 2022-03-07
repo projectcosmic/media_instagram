@@ -79,7 +79,10 @@ class InstagramAuthenticationUITest extends BrowserTestBase {
       ],
     ]);
     $this->assertSession()->pageTextContains('Linking successful.');
-    $this->assertNotNull(\Drupal::state()->get('media_instagram.token'), 'Token saved.');
+
+    $state_data = \Drupal::state()->get('media_instagram.token');
+    $this->assertNotNull($state_data, 'Token data saved.');
+    $this->assertNotNull($state_data['token'], 'Token saved.');
 
     \Drupal::state()->set('media_instagram_test.success', FALSE);
     $this->drupalGet('/admin/media-instagram/link');

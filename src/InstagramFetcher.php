@@ -96,7 +96,7 @@ class InstagramFetcher implements InstagramFetcherInterface {
    */
   public function getUserPosts($token) {
     try {
-      $response = $this->httpClient->get('https://graph.instagram.com/v13.0/4770967453017048/media', [
+      $response = $this->httpClient->get('https://graph.instagram.com/v13.0/me/media', [
         'query' => [
           'access_token' => $token,
         ],
