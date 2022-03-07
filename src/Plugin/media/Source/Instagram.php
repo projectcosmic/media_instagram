@@ -186,16 +186,6 @@ class Instagram extends MediaSourceBase {
         case 'thumbnail_uri':
           return $this->getLocalPictureUrl($post);
 
-        case 'thumbnail_width':
-        case 'thumbnail_height':
-          if ($local_picture = $this->getMetadata($media, 'thumbnail_uri')) {
-            $image = $this->imageFactory->get($local_picture);
-            return $attribute_name == 'thumbnail_width'
-              ? $image->getWidth()
-              : $image->getHeight();
-          }
-          return NULL;
-
         case 'default_name':
           return function_exists('text_summary')
             ? text_summary($this->getMetadata($media, 'caption'), NULL, 30)
