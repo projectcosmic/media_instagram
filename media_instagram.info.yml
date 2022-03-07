@@ -2,7 +2,7 @@ name: Media Instagram
 description: Provides media integration for Instagram via the Instagram Basic Display API.
 type: module
 core_version_requirement: ^9
-version: '0.1.0'
+version: '0.1.1'
 project: media_instagram
 dependencies:
   - drupal:media
